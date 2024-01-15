@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Form</title>
+  <link rel="stylesheet" href="style.css"> 
+ 
+</head>
+<body>
+  <div class="login-box">
+    <h2>sign up </h2>
+    <form id="signup-form">
+      <div class="user-box">
+        <input type="text" name="" required="" id="email">
+        <label>Email </label>
+        <span id="email-error" class="error"></span>
+      </div><br><br><br>
+      <div class="user-box">
+        
+        <input type="password" name="" required="" id="password">
+        <label>Password</label>
+        <span id="password-error" class="error"></span>
+      </div>
+      <button type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function(event) {
+      // Reset error messages
+      document.getElementById('email-error').textContent = '';
+      document.getElementById('password-error').textContent = '';
+
+      // Validate email
+      var emailInput = document.getElementById('email');
+      var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      if (!emailRegex.test(emailInput.value)) {
+        document.getElementById('email-error').textContent = 'Invalid email format';
+        event.preventDefault();
+      }
+
+      // Validate password
+      var passwordInput = document.getElementById('password');
+      var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W]).{8,}$/;
+      if (!passwordRegex.test(passwordInput.value)) {
+        document.getElementById('password-error').textContent = 'Password must have at least one lowercase letter, one uppercase letter, one number, include at least one special character,  and a length of 8 characters or more';
+        event.preventDefault();
+      }
+      if(passwordRegex.test(passwordInput.value)&&emailRegex.test(emailInput.value)){
+        const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const user = {
+        email,
+        password,
+      };
+  
+      // Store the user data in local storage
+      localStorage.setItem(email, JSON.stringify(user));
+      window.alert("account successfully created");
+      
+    }
+    }
+    );
+  </script>
+
+</body>
+</html>

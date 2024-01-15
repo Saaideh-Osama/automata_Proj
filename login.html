@@ -1,0 +1,57 @@
+<html> 
+  <head> 
+    <title> Log in</title>
+  <link rel="stylesheet" type="text/CSS" href="style.css"/>
+  </head>
+  <body> 
+<div class="login-box">
+    <h2>login form</h2>
+    <form id="signup-form">
+      <div class="user-box">
+        <input type="text" name="" required="" id="email">
+        <label>Email </label>
+        <span id="email-error" class="error"></span>
+      </div><br><br><br>
+      <div class="user-box">
+        
+        <input type="password" name="" required="" id="password">
+        <label>Password</label>
+        <span id="password-error" class="error"></span>
+      </div>
+      <button type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
+    </form>
+  </div>
+  <script> 
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+  var email = document.getElementById("email").value;
+var password = document.getElementById("password").value;
+  document.getElementById('email-error').textContent = '';
+document.getElementById('password-error').textContent = '';
+var storedUserData = localStorage.getItem(email);
+console.log(email)
+if (!storedUserData) {
+        document.getElementById('email-error').textContent = 'Email not registered';
+        event.preventDefault();
+      } else {
+        var storedUser = JSON.parse(storedUserData);
+        if (storedUser.password !== password) {
+          document.getElementById('password-error').textContent = 'Incorrect password';
+          event.preventDefault();
+        } else {
+          
+          window.location.href = "/main.html";
+          // You can redirect the user to another page or perform any other action here
+        }
+  
+   }})
+   
+  
+  </script> 
+</body>
+</html> 
